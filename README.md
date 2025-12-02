@@ -51,6 +51,62 @@ You can then execute your native executable with: `./target/quarkus-app-1.0-SNAP
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
+## Generating Documentation
+
+The documentation for this project is located in the `docs/` directory and uses TechDocs (Backstage). To generate the documentation site, use the TechDocs CLI:
+
+```shell script
+techdocs-cli generate --no-docker
+```
+
+This command will:
+- Generate the documentation site from the Markdown files in `docs/`
+- Use the configuration in `mkdocs.yaml`
+- Output the generated site in the `site/` directory
+
+The `--no-docker` flag ensures the generation runs without Docker, using local Python and MkDocs installation.
+
+### Prerequisites
+
+Before running the command, make sure you have the following installed:
+
+1. **techdocs-cli**: The TechDocs CLI tool
+2. **mkdocs**: Install with `pip3 install mkdocs mkdocs-techdocs-core --user`
+
+> **_NOTE:_** The documentation configuration is defined in `mkdocs.yaml` and the source files are in the `docs/` directory. After generation, you can view the documentation by opening `site/index.html` in a web browser.
+
+## Converting AsciiDoc to Markdown
+
+This project includes a script to convert AsciiDoc files (`.adoc`) to Markdown format (`.md`). This is useful for converting documentation files.
+
+### Installation
+
+First, install the required dependencies:
+
+```shell script
+npm install --save-dev @asciidoctor/core turndown
+```
+
+This installs:
+- **@asciidoctor/core**: AsciiDoc processor for JavaScript/Node.js
+- **turndown**: HTML to Markdown converter
+
+### Usage
+
+To convert an AsciiDoc file to Markdown, use the conversion script:
+
+```shell script
+node convert-adoc-to-md.js
+```
+
+This script will:
+- Read the `docs/README.adoc` file
+- Convert it from AsciiDoc to HTML using asciidoctor.js
+- Convert the HTML to Markdown using turndown
+- Save the result as `docs/README.md`
+
+> **_NOTE:_** The script is configured to convert `docs/README.adoc` to `docs/README.md`. You can modify the script to convert other AsciiDoc files as needed.
+
 ## Related Guides
 
 - Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code
